@@ -58,7 +58,7 @@ public class Main extends Application {
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3),
                 new KeyValue(sphere.layoutYProperty(), bounds.getMaxY()-sphere.getRadius())));
-        timeline.setCycleCount(5);
+        timeline.setCycleCount(4);
         timeline.play();
 
         Timeline timeline1 = new Timeline(new KeyFrame(Duration.seconds(3),
@@ -68,7 +68,7 @@ public class Main extends Application {
 
         Timeline timeline2 = new Timeline(new KeyFrame(Duration.seconds(3),
                 new KeyValue(sphere2.layoutYProperty(), bounds.getMaxY()-sphere2.getRadius())));
-        timeline2.setCycleCount(3);
+        timeline2.setCycleCount(4);
         timeline2.play();
 
         primaryStage.setTitle("Write a program that draws three black dots of radius 0.25 at x = 0, 1, 2 along the x-axis.\n" +
