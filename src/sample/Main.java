@@ -5,6 +5,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
@@ -12,7 +14,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CullFace;
 import javafx.scene.shape.Sphere;
@@ -25,21 +29,38 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
        Pane pane = new Pane();
 
+       Label l = new
+               Label(" ");
+
+       //Create a slider
       Slider slider  =  new Slider();
+      //set the value of property min, max and value
      slider.setMin(0);
      slider.setMax(3);
-     slider.setValue(1);
+     slider.setValue(0);
+     //enable Tickable and Tick MArks
      slider.setShowTickLabels(true);
      slider.setShowTickMarks(true);
      slider.setMajorTickUnit(1);
      slider.setMinorTickCount(1);
      slider.setBlockIncrement(1);
      slider.setSnapToTicks(true);
+   //  slider.setBackground(Background.EMPTY);
+
+        slider.valueProperty().addListener(
+                new ChangeListener<Number>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                        l.setText("Value:"+ t1);
+                    }
+                }
+        );
+
 
         Label sliderCaption = new Label( "Adjust t ");
 
-        Label sliderValue = new Label(
-                Double.toString(slider.getValue()));
+       /* Label sliderValue = new Label(
+                Double.toString(slider.getValue()));*/
 
 
 
@@ -78,6 +99,11 @@ public class Main extends Application {
 //        sphere2.setTranslateY(100);
 //        sphere2.setTranslateX(140);
 
+        /*VBox root = new
+                VBox();
+        root.getChildren().addAll(sphere,sphere1
+                ,sphere2,sphere3,sphere4,sphere5,sliderCaption,slider);*/
+
        pane.getChildren().add(sphere);
        pane.getChildren().add(sphere1);
         pane.getChildren().add(sphere2);
@@ -86,10 +112,10 @@ public class Main extends Application {
         pane.getChildren().add(sphere5);
         pane.getChildren().add(slider);
         pane.getChildren().add(sliderCaption);
-        pane.getChildren().add(sliderValue);
+        pane.getChildren().add(l);
 
 //        Group root = new Group(sphere);
-        sliderValue.relocate(350,200);
+        l.relocate(350,200);
         sliderCaption.relocate(120,200);
         slider.relocate(200,200);
         sphere.relocate(100,300);
@@ -98,7 +124,7 @@ public class Main extends Application {
         sphere3.relocate(150,350);
         sphere4.relocate(250,350);
         sphere5.relocate(350,350);
-        Scene scene = new Scene(pane,400,400);
+        Scene scene = new Scene(pane,700,400);
       //  scene.setFill(Color.BLACK);
         primaryStage.setScene(scene);
         //scene.setFill(Color.BLACK);
